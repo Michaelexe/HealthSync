@@ -1,4 +1,15 @@
+/*
+ * Home Page Stylesheet
+ * Defines the layout and styling for the application's landing page
+ * Implements responsive design and interactive elements
+ */
+
+/* Main Container
+ * Full-viewport container with centered content
+ * Includes gradient background and overflow handling
+ */
 .container {
+  /* Full viewport height container with centered content */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,6 +20,7 @@
   overflow: hidden;
 }
 
+/* Container animation background - currently disabled */
 /* .container::before {
   content: '';
   position: absolute;
@@ -20,7 +32,12 @@
   animation: rotate 30s linear infinite;
 } */
 
+/* Content Layout
+ * Responsive grid layout for content organization
+ * Adjusts between mobile and desktop views
+ */
 .home-container {
+  /* Responsive container with reverse column layout on mobile */
   max-width: 800px;
   width: calc(100% - 40px);
   display: flex;
@@ -30,7 +47,9 @@
   text-align: center;
 }
 
+/* Text content section */
 .home-container .text {
+  /* Centered text layout with consistent spacing */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +57,9 @@
   gap: 10px;
 }
 
+/* Main heading styles */
 .home-container .text h1 {
+  /* Gradient text effect for main title */
   font-size: 50px;
   font-weight: 700;
   background: var(--gradient-primary);
@@ -47,17 +68,24 @@
   margin-bottom: 20px;
 }
 
+/* Heading span for emphasis */
 .home-container .text h1 span {
   color: var(--lightblue);
   font-weight: 60px;
 }
 
+/* Interactive Elements
+ * Styles for buttons and interactive components
+ * Implements hover effects and animations
+ */
 .home-container .text .buttons {
   display: flex;
   gap: 40px;
 }
 
+/* Interactive button styles */
 .home-container .text .buttons button {
+  /* Gradient background with smooth hover animations */
   background: var(--gradient-primary);
   color: white;
   padding: 12px 24px;
@@ -71,20 +99,28 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Button hover effects */
 .home-container .text .buttons button:hover {
   transform: translateY(-2px);
   box-shadow: 0 15px 30px rgba(74, 144, 226, 0.2);
 }
 
+/* Paragraph text sizing */
 .home-container .text p {
   font-size: 25px;
 }
 
+/* Image sizing */
 .home-container img {
   width: 50%;
 }
 
+/* Responsive Design
+ * Media queries for layout adjustments
+ * Optimizes display for different screen sizes
+ */
 @media (min-width: 768px) {
+  /* Grid layout for desktop view */
   .home-container {
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -101,6 +137,7 @@
   }
 }
 
+/* Animation keyframes */
 @keyframes rotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

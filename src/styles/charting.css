@@ -1,3 +1,13 @@
+/*
+ * Charting Component Stylesheet
+ * Defines styles for the medical charting information display
+ * Implements a clean, professional medical interface design
+ */
+
+/* Charting Container
+ * Main container for the charting component
+ * Uses glass-morphism effect with backdrop blur
+ */
 .charting-container {
   width: 400px;
   background: rgba(255, 255, 255, 0.95);
@@ -9,6 +19,10 @@
   overflow: hidden;
 }
 
+/* Charting Header
+ * Styles for the header section of the charting display
+ * Uses gradient background for visual hierarchy
+ */
 .charting-container .charting-header {
   padding: 24px 32px;
   display: flex;
@@ -24,6 +38,10 @@
   letter-spacing: -0.02em;
 }
 
+/* Charting Information Box
+ * Container for individual charting entries
+ * Implements card-like design with hover effects
+ */
 .charting-container .charting-box {
   display: flex;
   flex-direction: column;
@@ -31,6 +49,10 @@
   background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
 }
 
+/* Individual Chart Entry
+ * Styles for each piece of charting information
+ * Includes different states for warnings and messages
+ */
 .charting-container .charting-box .charting-info {
   background: rgba(255, 255, 255, 0.9);
   padding: 12px 16px;

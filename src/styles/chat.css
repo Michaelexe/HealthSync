@@ -1,3 +1,13 @@
+/*
+ * Chat Interface Stylesheet
+ * This stylesheet defines the visual appearance and interactions for the chat interface
+ * including messages, input area, and animations.
+ */
+
+/* Global CSS Variables
+ * Defines reusable values for colors, gradients, shadows, and transitions
+ * These ensure consistency across the chat interface
+ */
 :root {
   --lightblue: #4a90e2;
   --primary-gradient: linear-gradient(135deg, #4a90e2 0%, #00b4d8 100%);
@@ -6,6 +16,10 @@
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Main Container
+ * Establishes the primary layout structure for the chat interface
+ * Uses flex layout to center content and maintain responsive design
+ */
 .container {
   display: flex;
   flex-direction: row;
@@ -18,6 +32,10 @@
   gap: 20px;
 }
 
+/* Chat Container
+ * Creates a card-like container for the chat interface
+ * Includes backdrop blur and subtle animations for modern UI feel
+ */
 .chat-container {
   position: relative;
   max-width: 1000px;
@@ -34,7 +52,10 @@
   animation: containerEntry 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Header styles */
+/* Header Section
+ * Defines styling for the chat header including navigation and title
+ * Implements hover effects for interactive elements
+ */
 .chat-container .chat-header {
   display: flex;
   align-items: center;
@@ -64,7 +85,10 @@
   letter-spacing: -0.02em;
 }
 
-/* Chat box styles */
+/* Message Display Area
+ * Styles the scrollable area containing chat messages
+ * Implements smooth scrolling and gradient background
+ */
 .chat-container .chat-box {
   padding: 32px;
   display: flex;
@@ -106,7 +130,10 @@
   color: white;
 }
 
-/* Input area styles */
+/* Input Area
+ * Defines the styling for the message input section
+ * Includes voice input button, text input, and send button
+ */
 .chat-container .chat-input {
   display: flex;
   align-items: center;
@@ -256,6 +283,10 @@
   }
 }
 
+/* Voice Button Styling
+ * Implements visual feedback for voice input functionality
+ * Includes animation states for active recording
+ */
 .voice-button {
   position: relative;
   display: flex;
@@ -285,6 +316,10 @@
   fill: white;
 }
 
+/* Voice Visualization
+ * Creates animated bars to indicate active voice recording
+ * Uses keyframe animations for dynamic visual feedback
+ */
 .voice-visualization {
   position: absolute;
   bottom: 2px;

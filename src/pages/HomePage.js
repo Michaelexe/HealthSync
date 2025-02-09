@@ -1,6 +1,27 @@
+/**
+ * HomePage Component
+ * Landing page for the HealthSync application
+ * 
+ * @component HomePage
+ * @param {Object} props Component properties
+ * @param {Function} props.setBot Function to select the AI healthcare provider
+ * @param {Function} props.setCurrentPage Function to handle page navigation
+ */
+
+// Import dependencies
 import React from "react";
 import "@/styles/home.css";
 
+/**
+ * HomePage Component Implementation
+ * Displays welcome message and bot selection options
+ * 
+ * Features:
+ * - Welcoming interface with branding
+ * - Two bot options: Ava and Eli
+ * - Responsive design with logo display
+ * - Interactive buttons for bot selection
+ */
 function HomePage({ setBot, setCurrentPage }) {
   return (
     <div className="container" style={{ alignItems: "center" }}>

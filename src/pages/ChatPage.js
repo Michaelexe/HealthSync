@@ -2,6 +2,19 @@ import React, { useEffect, useState } from "react";
 import "@/styles/chat.css";
 import Charting from "./Charting";
 
+/**
+ * ChatPage Component
+ * Main interface for user-bot interactions and medical charting
+ * 
+ * @component ChatPage
+ * @param {Object} props Component properties
+ * @param {string} props.bot Selected healthcare provider name
+ * @param {Function} props.setBot Function to update bot selection
+ * @param {Function} props.setCurrentPage Navigation control function
+ * @param {Array} props.chartingInfo Medical charting information array
+ * @param {Function} props.setChartingInfo Function to update charting information
+ */
+
 function ChatPage({
   bot,
   setBot,
@@ -17,6 +30,15 @@ function ChatPage({
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
 
+  /**
+   * Voice Recognition Setup
+   * Implements browser's Speech Recognition API for voice input
+   * 
+   * Features:
+   * - Continuous speech recognition
+   * - Real-time transcription to input field
+   * - Toggle functionality for voice input
+   */
   useEffect(() => {
     if ("webkitSpeechRecognition" in window) {
       const recognition = new window.webkitSpeechRecognition();
@@ -53,6 +75,15 @@ function ChatPage({
     }
   };
 
+  /**
+   * Message Processing
+   * Handles communication with backend API and updates chat interface
+   * 
+   * Features:
+   * - Async message processing
+   * - Charting information updates
+   * - Error handling for API communication
+   */
   useEffect(() => {
     if (messages.length > 1 && loading) {
       fetch("/api/agent", {

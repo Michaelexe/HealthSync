@@ -1,5 +1,21 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+/**
+ * API Handler for AI Agent Integration
+ * Manages communication with Together.ai API for medical charting
+ * 
+ * @module AgentAPI
+ * @description Handles AI-powered medical documentation and chat interactions
+ */
 
+/**
+ * Main API Route Handler
+ * @param {Object} req HTTP request object
+ * @param {Object} res HTTP response object
+ * 
+ * Processes:
+ * - POST requests with conversation history
+ * - AI response generation and formatting
+ * - Error handling and response validation
+ */
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { conversationHistory } = req.body;
@@ -20,6 +36,18 @@ export default async function handler(req, res) {
   }
 }
 
+/**
+ * AI Response Generator
+ * @param {Array} conversationHistory Array of conversation messages
+ * @returns {Object|null} Structured medical documentation or null on error
+ * 
+ * Features:
+ * - Together.ai API integration
+ * - SOAP format enforcement
+ * - Structured JSON response generation
+ * - Error handling and validation
+ * - Conversation context management
+ */
 async function getAIResponse(conversationHistory) {
   const apiKey = process.env.TOGETHER_API_KEY;
 

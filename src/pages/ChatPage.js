@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "@/styles/chat.css";
 import Charting from "./Charting";
 
@@ -14,6 +14,44 @@ function ChatPage({
   const [messages, setMessages] = React.useState([
     "bot: Hello! How can I help you today?",
   ]);
+  const [isListening, setIsListening] = useState(false);
+  const [recognition, setRecognition] = useState(null);
+
+  useEffect(() => {
+    if ("webkitSpeechRecognition" in window) {
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = Array.from(event.results)
+          .map(result => result[0])
+          .map(result => result.transcript)
+          .join('');
+
+        inputRef.current.value = transcript;
+      };
+
+      setRecognition(recognition);
+    }
+  }, []);
+
+  const handleVoiceStart = () => {
+    if (recognition && !isListening) {
+      recognition.start();
+    } else if (recognition && isListening) {
+      recognition.stop();
+    }
+  };
 
   useEffect(() => {
     if (messages.length > 1 && loading) {
@@ -91,8 +129,12 @@ function ChatPage({
           })}
         </div>
         <div className="chat-input">
-          <button className="voice-button">
+          <button 
+            className={`voice-button ${isListening ? 'listening' : ''}`}
+            onClick={handleVoiceStart}
+          >
             <svg
+              className="mic-icon"
               fill="#000000"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
@@ -114,6 +156,11 @@ function ChatPage({
                 </g>
               </g>
             </svg>
+            <div className="voice-visualization">
+              {isListening && Array(4).fill(0).map((_, i) => (
+                <div key={i} className="voice-bar"></div>
+              ))}
+            </div>
           </button>
           <input
             type="text"

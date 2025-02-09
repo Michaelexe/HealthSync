@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "dotenv": "^16.4.7",
     "health-sync": "file:",
     "next": "15.1.6",
     "react": "^19.0.0",

@@ -1,0 +1,77 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-container {
+  max-width: 800px;
+  width: calc(100% - 40px);
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+}
+
+.home-container .text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.home-container .text h1 {
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.home-container .text h1 span {
+  color: var(--lightblue);
+  font-weight: 60px;
+}
+
+.home-container .text .buttons {
+  display: flex;
+  gap: 40px;
+}
+
+.home-container .text .buttons button {
+  background-color: var(--lightblue);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 30px;
+  width: 120px;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.home-container .text p {
+  font-size: 25px;
+}
+
+.home-container img {
+  width: 50%;
+}
+
+@media (min-width: 768px) {
+  .home-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 40px;
+  }
+
+  .home-container .text {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .home-container img {
+    width: 100%;
+  }
+}

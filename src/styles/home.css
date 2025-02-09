@@ -49,6 +49,7 @@
   width: 120px;
   margin-top: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .home-container .text p {

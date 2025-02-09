@@ -5,7 +5,7 @@
   border-radius: 20px;
   max-height: 90vh;
   box-shadow: var(--container-shadow);
-  border: 1px solid rgba(74, 144, 226, 0.1);
+  /* border: 1px solid rgba(74, 144, 226, 0.1); */
   overflow: hidden;
 }
 
@@ -13,7 +13,6 @@
   padding: 24px 32px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgb(238, 241, 245);
   background: var(--gradient-primary);
   color: white;
 }

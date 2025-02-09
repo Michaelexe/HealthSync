@@ -102,7 +102,8 @@ async function getAIResponse(userInput, userHistory) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free", // Ensure this model suits your application's needs
+          //   model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+          model: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free", // Ensure this model suits your application's needs
           messages: messages,
           max_tokens: 2500, // Adjust based on the model's token limitations
           temperature: 0.3, // Lower temperature for more deterministic responses

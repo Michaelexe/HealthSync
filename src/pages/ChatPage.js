@@ -1,14 +1,22 @@
 import React, { useEffect } from "react";
 import "@/styles/chat.css";
+import Charting from "./Charting";
 
-function ChatPage({ bot, setBot }) {
+function ChatPage({
+  bot,
+  setBot,
+  setCurrentPage,
+  chartingInfo,
+  setChartingInfo,
+}) {
   const inputRef = React.useRef(null);
+  const [loading, setLoading] = React.useState(false);
   const [messages, setMessages] = React.useState([
     "bot: Hello! How can I help you today?",
   ]);
 
   useEffect(() => {
-    if (messages.length > 1) {
+    if (messages.length > 1 && loading) {
       fetch("/api/agent", {
         method: "POST",
         headers: {
@@ -20,7 +28,9 @@ function ChatPage({ bot, setBot }) {
       })
         .then(async (response) => {
           const data = await response.json();
-          console.log(data);
+          setChartingInfo([...chartingInfo, data.charting_information]);
+          setMessages([...messages, `bot: ${data.next_question}`]);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
@@ -55,6 +65,13 @@ function ChatPage({ bot, setBot }) {
             </g>
           </svg>
           <h1>Chatting with {bot}</h1>
+          <button
+            onClick={() => {
+              setCurrentPage("charting");
+            }}
+          >
+            Done
+          </button>
         </div>
         <div className="chat-box">
           {messages.map((message, index) => {
@@ -106,6 +123,7 @@ function ChatPage({ bot, setBot }) {
               if (e.key === "Enter") {
                 setMessages([...messages, inputRef.current.value]);
                 inputRef.current.value = "";
+                setLoading(true);
               }
             }}
           />
@@ -114,6 +132,7 @@ function ChatPage({ bot, setBot }) {
               if (inputRef.current.value) {
                 setMessages([...messages, inputRef.current.value]);
                 inputRef.current.value = "";
+                setLoading(true);
               }
             }}
           >
@@ -121,6 +140,7 @@ function ChatPage({ bot, setBot }) {
           </button>
         </div>
       </div>
+      <Charting chartingInfo={chartingInfo} />
     </div>
   );
 }

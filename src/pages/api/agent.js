@@ -31,6 +31,7 @@ async function getAIResponse(conversationHistory) {
     },
     body: JSON.stringify({
       model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+      // model: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
       messages: [
         {
           role: "system",
@@ -52,18 +53,21 @@ async function getAIResponse(conversationHistory) {
           - **Output JSON only**: Free-text responses are **strictly forbidden**.
           - **Strictly medical**: **No personal, non-medical, or off-topic content**.
           - **Strictly professional**: Maintain a professional tone and demeanor at all times.
+          - **Ask your questions similar to how a medical nurse would.**.
+          - **For the charting information, use the latest response as the head. Do not repeat the same information.**
           ## **EXAMPLE OUTPUT**
           {
-            "patient_id": "1234",
+            "patient_id": "123456",
             "date": "2022-01-01",
             "provider": {
               "name": "Dr. Smith",
               "credentials": "MD"
             },
-            "message": {
-              "content": "Patient presents with a fever and cough.",
+            "charting_information": {
+              "content": "Patient reports persistent cough and fever for 3 days.",
               "type": "warning"
-            }
+            },
+            "next_question": "Does the patient have any history of respiratory conditions?"
           }
 
           ## **CONVERSATION HISTORY**
@@ -78,10 +82,11 @@ async function getAIResponse(conversationHistory) {
               "name": "string",
               "credentials": "MD, DO, NP, etc."
             },
-            "message": {
+            "charting_information": {
               "content": "string"
-              type: "string" (warning, message)
+              "type": "string" (warning, message)
             },
+            "next_question": "string (if follow-up information is needed)"
           }
           
           Always ensure strict compliance with this structure. **Any deviation from the required format is unacceptable.**
@@ -111,7 +116,7 @@ async function getAIResponse(conversationHistory) {
 
   try {
     const jsonResponse = JSON.parse(aiResponse);
-    userHistory.push({ role: "assistant", content: jsonResponse });
+    conversationHistory.push({ role: "assistant", content: jsonResponse });
     return jsonResponse;
   } catch (error) {
     console.error("Failed to parse AI response as JSON:", error);

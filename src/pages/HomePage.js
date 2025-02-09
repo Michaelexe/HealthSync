@@ -1,7 +1,7 @@
 import React from "react";
 import "@/styles/home.css";
 
-function HomePage({ setBot }) {
+function HomePage({ setBot, setCurrentPage }) {
   return (
     <div className="container">
       <div className="home-container">
@@ -14,6 +14,7 @@ function HomePage({ setBot }) {
             <button
               onClick={() => {
                 setBot("Ava");
+                setCurrentPage("chat");
               }}
             >
               Ava
@@ -21,6 +22,7 @@ function HomePage({ setBot }) {
             <button
               onClick={() => {
                 setBot("Eli");
+                setCurrentPage("chat");
               }}
             >
               Eli

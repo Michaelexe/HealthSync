@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     const { conversationHistory } = req.body;
 
     try {
@@ -26,14 +26,14 @@ async function getAIResponse(conversationHistory) {
   const response = await fetch("https://api.together.xyz/v1/chat/completions", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${apiKey}`,
-      "Content-Type": "application/json"
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "together-ai/DeepSeek-R1-Distill-Llama-70B-free",
+      model: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
       messages: [
-        { 
-          role: "system", 
+        {
+          role: "system",
           content: `You are HealthSync, an AI system **strictly specialized in medical charting and EMR documentation**. 
           Your purpose is to **process patient intake data and generate fully structured medical reports in JSON format**, adhering to strict **SOAP (Subjective, Objective, Assessment, Plan) standards**.
 
@@ -50,9 +50,24 @@ async function getAIResponse(conversationHistory) {
           - **Follow-up recommendations**: If additional data is needed, **suggest specific follow-up questions**.
           - **No assumptions**: If patient input is unclear, **flag missing information instead of guessing**.
           - **Output JSON only**: Free-text responses are **strictly forbidden**.
+          - **Strictly medical**: **No personal, non-medical, or off-topic content**.
+          - **Strictly professional**: Maintain a professional tone and demeanor at all times.
+          ## **EXAMPLE OUTPUT**
+          {
+            "patient_id": "1234",
+            "date": "2022-01-01",
+            "provider": {
+              "name": "Dr. Smith",
+              "credentials": "MD"
+            },
+            "message": {
+              "content": "Patient presents with a fever and cough.",
+              "type": "warning"
+            }
+          }
 
           ## **CONVERSATION HISTORY**
-          ${userHistory}
+          ${conversationHistory}
 
           ## **RESPONSE FORMAT (STRICT JSON SCHEMA)**
           Return a JSON object with the following structure:
@@ -70,7 +85,7 @@ async function getAIResponse(conversationHistory) {
           }
           
           Always ensure strict compliance with this structure. **Any deviation from the required format is unacceptable.**
-          If missing information is detected, **return a follow-up prompt requesting the exact missing fields.**`
+          If missing information is detected, **return a follow-up prompt requesting the exact missing fields.**`,
         },
       ],
       max_tokens: 2500,
@@ -79,8 +94,8 @@ async function getAIResponse(conversationHistory) {
       top_k: 50,
       repetition_penalty: 1.05,
       stop: ["<|end_of_text|>"],
-      stream: false
-    })
+      stream: false,
+    }),
   });
 
   if (!response.ok) {
@@ -89,9 +104,10 @@ async function getAIResponse(conversationHistory) {
   }
 
   const data = await response.json();
-  const aiResponse = data.choices && data.choices.length > 0 
-    ? data.choices[0].message.content 
-    : "{}"; // Ensure response is always JSON
+  const aiResponse =
+    data.choices && data.choices.length > 0
+      ? data.choices[0].message.content
+      : "{}"; // Ensure response is always JSON
 
   try {
     const jsonResponse = JSON.parse(aiResponse);

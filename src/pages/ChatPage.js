@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "@/styles/chat.css";
 
 function ChatPage({ bot, setBot }) {
+  const inputRef = React.useRef(null);
+  const [messages, setMessages] = React.useState([
+    "bot: Hello! How can I help you today?",
+  ]);
+
+  useEffect(() => {
+    if (messages.length > 1) {
+      fetch("/api/agent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          conversationHistory: messages,
+        }),
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [messages]);
   return (
     <div className="container">
       <div className="chat-container">
@@ -32,9 +57,21 @@ function ChatPage({ bot, setBot }) {
           <h1>Chatting with {bot}</h1>
         </div>
         <div className="chat-box">
-          <div className="chat-message">
-            <p>Hi! How can I help you today?</p>
-          </div>
+          {messages.map((message, index) => {
+            if (message.slice(0, 3) === "bot") {
+              return (
+                <div className="chat-message">
+                  <p>{message.slice(5)}</p>
+                </div>
+              );
+            } else {
+              return (
+                <div className="chat-message chat-message--user">
+                  <p>{message}</p>
+                </div>
+              );
+            }
+          })}
         </div>
         <div className="chat-input">
           <button className="voice-button">
@@ -61,8 +98,27 @@ function ChatPage({ bot, setBot }) {
               </g>
             </svg>
           </button>
-          <input type="text" placeholder="Type a message..." />
-          <button>Send</button>
+          <input
+            type="text"
+            placeholder="Type a message..."
+            ref={inputRef}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setMessages([...messages, inputRef.current.value]);
+                inputRef.current.value = "";
+              }
+            }}
+          />
+          <button
+            onClick={() => {
+              if (inputRef.current.value) {
+                setMessages([...messages, inputRef.current.value]);
+                inputRef.current.value = "";
+              }
+            }}
+          >
+            Send
+          </button>
         </div>
       </div>
     </div>

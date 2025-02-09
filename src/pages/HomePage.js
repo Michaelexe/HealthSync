@@ -3,7 +3,7 @@ import "@/styles/home.css";
 
 function HomePage({ setBot, setCurrentPage }) {
   return (
-    <div className="container">
+    <div className="container" style={{ alignItems: "center" }}>
       <div className="home-container">
         <div className="text">
           <h1>

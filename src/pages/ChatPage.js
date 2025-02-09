@@ -22,7 +22,7 @@ function ChatPage({
       const recognition = new window.webkitSpeechRecognition();
       recognition.continuous = true;
       recognition.interimResults = true;
-      recognition.lang = 'en-US';
+      recognition.lang = "en-US";
 
       recognition.onstart = () => {
         setIsListening(true);
@@ -34,9 +34,9 @@ function ChatPage({
 
       recognition.onresult = (event) => {
         const transcript = Array.from(event.results)
-          .map(result => result[0])
-          .map(result => result.transcript)
-          .join('');
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join("");
 
         inputRef.current.value = transcript;
       };
@@ -82,6 +82,7 @@ function ChatPage({
           <svg
             onClick={() => {
               setBot("");
+              setCurrentPage("home");
             }}
             viewBox="0 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
@@ -103,13 +104,6 @@ function ChatPage({
             </g>
           </svg>
           <h1>Chatting with {bot}</h1>
-          <button
-            onClick={() => {
-              setCurrentPage("charting");
-            }}
-          >
-            Done
-          </button>
         </div>
         <div className="chat-box">
           {messages.map((message, index) => {
@@ -129,8 +123,8 @@ function ChatPage({
           })}
         </div>
         <div className="chat-input">
-          <button 
-            className={`voice-button ${isListening ? 'listening' : ''}`}
+          <button
+            className={`voice-button ${isListening ? "listening" : ""}`}
             onClick={handleVoiceStart}
           >
             <svg
@@ -157,9 +151,10 @@ function ChatPage({
               </g>
             </svg>
             <div className="voice-visualization">
-              {isListening && Array(4).fill(0).map((_, i) => (
-                <div key={i} className="voice-bar"></div>
-              ))}
+              {isListening &&
+                Array(4)
+                  .fill(0)
+                  .map((_, i) => <div key={i} className="voice-bar"></div>)}
             </div>
           </button>
           <input

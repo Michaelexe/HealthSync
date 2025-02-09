@@ -30,5 +30,29 @@
 
 .charting-container .charting-box .charting-info {
   background-color: white;
-  padding: 5px 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 8px;
+  margin: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.charting-info .icon {
+  display: flex;
+  align-items: center;
+}
+
+.charting-info .content {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.charting-info.warning {
+  background-color: #fff3e0;
+}
+
+.charting-info.message {
+  background-color: #e3f2fd;
 }

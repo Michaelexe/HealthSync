@@ -1,8 +1,8 @@
 :root {
-  --lightblue: #007bff;
-  --primary-gradient: linear-gradient(135deg, #0061f2 0%, #00c6f9 100%);
-  --message-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --container-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+  --lightblue: #4a90e2;
+  --primary-gradient: linear-gradient(135deg, #4a90e2 0%, #00b4d8 100%);
+  --message-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --container-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -12,7 +12,7 @@
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%);
+  background: var(--gradient-bg);
   padding: 20px;
   perspective: 1000px;
   gap: 20px;
@@ -24,7 +24,8 @@
   width: calc(100% - 40px);
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   height: 90vh;
   box-shadow: var(--container-shadow);
   border-radius: 24px;
@@ -71,7 +72,7 @@
   gap: 24px;
   overflow-y: auto;
   height: 100%;
-  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
   scroll-behavior: smooth;
 }
 
@@ -84,6 +85,7 @@
   max-width: 60%;
   animation: messageEntry 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: left bottom;
+  border: 1px solid rgba(74, 144, 226, 0.1);
 }
 
 .chat-container .chat-box .chat-message p {
@@ -95,8 +97,9 @@
 
 .chat-container .chat-box .chat-message--user {
   margin-left: auto;
-  background: var(--primary-gradient);
+  background: var(--gradient-primary);
   transform-origin: right bottom;
+  border: none;
 }
 
 .chat-container .chat-box .chat-message--user p {
@@ -109,7 +112,8 @@
   align-items: center;
   padding: 24px 32px;
   gap: 16px;
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
   border-top: 1px solid rgba(238, 241, 245, 0.6);
 }
 
@@ -131,7 +135,7 @@
 
 .chat-container .chat-input button {
   flex-shrink: 0;
-  background: var(--primary-gradient);
+  background: var(--gradient-primary);
   color: white;
   padding: 16px 28px;
   border: none;
